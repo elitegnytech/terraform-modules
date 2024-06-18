@@ -34,7 +34,7 @@ locals {
 }
 
 terraform {
-  required_version = ">= 5.0"
+  required_version = ">= 1.8.0"
 
   required_providers {
     archive_file = {
