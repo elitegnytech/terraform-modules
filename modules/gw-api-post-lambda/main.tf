@@ -77,7 +77,7 @@ resource "aws_api_gateway_method_response" "this" {
 
 resource "aws_api_gateway_deployment" "this" {
   depends_on = [
-    aws_api_gateway_integration.this.id,
+    aws_api_gateway_integration.this,
   ]
 
   rest_api_id       = var.rest_api_id
