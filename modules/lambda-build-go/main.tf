@@ -37,9 +37,9 @@ terraform {
   required_version = ">= 1.8.0"
 
   required_providers {
-    archive_file = {
+    archive = {
       source  = "hashicorp/archive"
-      version = ">= 2.2.0"
+      version = ">= 2.3.0"
     }
   }
 }
