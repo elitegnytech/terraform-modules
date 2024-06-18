@@ -59,6 +59,8 @@ resource "terraform_data" "build" {
   triggers_replace = [
     var.always_update ? timestamp() : null,
     jsonencode(var.triggers),
+    local.binary_path,
+    local.archive_path
   ]
 }
 
