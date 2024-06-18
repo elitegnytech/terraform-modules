@@ -1,4 +1,4 @@
-variable "lambda_build_id" {
+variable "lambda_name" {
   type = string
 }
 
@@ -29,8 +29,8 @@ output "output_path" {
 }
 
 locals {
-  binary_path  = "${path.root}/.bin/${var.lambda_build_id}/bootstrap"
-  archive_path = "${path.root}/.bin/${var.lambda_build_id}/bootstrap.zip"
+  binary_path  = "${path.root}/.bin/${var.lambda_name}/bootstrap"
+  archive_path = "${path.root}/.bin/${var.lambda_name}/bootstrap.zip"
 }
 
 terraform {
