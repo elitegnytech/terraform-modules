@@ -6,6 +6,10 @@ variable "resource_id" {
   type = string
 }
 
+output "intergration_id" {
+  value = aws_api_gateway_integration.this
+}
+
 terraform {
   required_version = ">= 1.8.0"
 
