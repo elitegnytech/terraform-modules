@@ -10,7 +10,7 @@ variable "lambda_invoke_arn" {
   type = string
 }
 
-output "intergration_id" {
+output "integration_id" {
   value = aws_api_gateway_integration.this
 }
 

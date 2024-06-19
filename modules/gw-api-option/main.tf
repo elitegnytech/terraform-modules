@@ -6,7 +6,7 @@ variable "resource_id" {
   type = string
 }
 
-output "intergration_id" {
+output "integration_id" {
   value = aws_api_gateway_integration.this
 }
 
