@@ -6,18 +6,6 @@ variable "resource_id" {
   type = string
 }
 
-variable "path" {
-  type = string
-}
-
-variable "stage_name" {
-  type = string
-}
-
-variable "stage_description" {
-  type = string
-}
-
 terraform {
   required_version = ">= 1.8.0"
 
@@ -60,9 +48,11 @@ resource "aws_api_gateway_integration_response" "this" {
   http_method = aws_api_gateway_method.this.http_method
   status_code = aws_api_gateway_method_response.this.status_code
 
+  content_handling = "PASSTHROUGH"
+
   response_parameters = {
-    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
-    "method.response.header.Access-Control-Allow-Methods" = "'GET,OPTIONS,POST,PUT'",
+    "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'",
+    "method.response.header.Access-Control-Allow-Methods" = "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'",
     "method.response.header.Access-Control-Allow-Origin"  = "'*'"
   }
 
@@ -87,16 +77,4 @@ resource "aws_api_gateway_method_response" "this" {
     "method.response.header.Access-Control-Allow-Methods" = true,
     "method.response.header.Access-Control-Allow-Origin"  = true
   }
-}
-
-resource "aws_api_gateway_deployment" "this" {
-  depends_on = [
-    aws_api_gateway_integration.this,
-    aws_api_gateway_integration_response.this
-  ]
-
-  rest_api_id       = var.rest_api_id
-  stage_name        = var.stage_name
-  stage_description = "${var.stage_description} - ${aws_api_gateway_integration.this.id}"
-  description       = "Created by terraform - ${aws_api_gateway_integration.this.id}"
 }

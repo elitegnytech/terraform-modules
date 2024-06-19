@@ -6,18 +6,6 @@ variable "resource_id" {
   type = string
 }
 
-variable "path" {
-  type = string
-}
-
-variable "stage_name" {
-  type = string
-}
-
-variable "stage_description" {
-  type = string
-}
-
 variable "lambda_invoke_arn" {
   type = string
 }
@@ -72,16 +60,4 @@ resource "aws_api_gateway_method_response" "this" {
   resource_id = var.resource_id
   http_method = aws_api_gateway_method.this.http_method
   status_code = 200
-}
-
-resource "aws_api_gateway_deployment" "this" {
-  depends_on = [
-    aws_api_gateway_integration.this,
-    aws_api_gateway_integration_response.this
-  ]
-
-  rest_api_id       = var.rest_api_id
-  stage_name        = var.stage_name
-  stage_description = "${var.stage_description} - ${aws_api_gateway_integration.this.id}"
-  description = "Created by terraform - ${aws_api_gateway_integration.this.id}"
 }
