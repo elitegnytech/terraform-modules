@@ -2,7 +2,7 @@ variable "rest_api_id" {
   type = string
 }
 
-variable "root_resource_id" {
+variable "resource_id" {
   type = string
 }
 
@@ -33,17 +33,16 @@ terraform {
   }
 }
 
-
 resource "aws_api_gateway_method" "this" {
   rest_api_id   = var.rest_api_id
-  resource_id   = var.root_resource_id
+  resource_id   = var.resource_id
   http_method   = "POST"
   authorization = "NONE"
 }
 
 resource "aws_api_gateway_integration" "this" {
   rest_api_id             = var.rest_api_id
-  resource_id             = var.root_resource_id
+  resource_id             = var.resource_id
   http_method             = aws_api_gateway_method.this.http_method
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
@@ -52,7 +51,7 @@ resource "aws_api_gateway_integration" "this" {
 
 resource "aws_api_gateway_integration_response" "this" {
   rest_api_id = var.rest_api_id
-  resource_id = var.root_resource_id
+  resource_id = var.resource_id
   http_method = aws_api_gateway_method.this.http_method
   status_code = aws_api_gateway_method_response.this.status_code
 
@@ -70,7 +69,7 @@ resource "aws_api_gateway_integration_response" "this" {
 
 resource "aws_api_gateway_method_response" "this" {
   rest_api_id = var.rest_api_id
-  resource_id = var.root_resource_id
+  resource_id = var.resource_id
   http_method = aws_api_gateway_method.this.http_method
   status_code = 200
 }

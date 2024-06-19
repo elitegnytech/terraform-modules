@@ -2,7 +2,7 @@ variable "rest_api_id" {
   type = string
 }
 
-variable "root_resource_id" {
+variable "resource_id" {
   type = string
 }
 
@@ -29,25 +29,18 @@ terraform {
   }
 }
 
-
-resource "aws_api_gateway_resource" "api" {
-  rest_api_id = var.rest_api_id
-  parent_id   = var.root_resource_id
-  path_part   = var.path
-}
-
 # setup options route
 
 resource "aws_api_gateway_method" "this" {
   rest_api_id   = var.rest_api_id
-  resource_id   = aws_api_gateway_resource.api.id
+  resource_id   = var.resource_id
   http_method   = "OPTIONS"
   authorization = "NONE"
 }
 
 resource "aws_api_gateway_integration" "this" {
   rest_api_id          = var.rest_api_id
-  resource_id          = aws_api_gateway_resource.api.id
+  resource_id          = var.resource_id
   http_method          = aws_api_gateway_method.this.http_method
   type                 = "MOCK"
   passthrough_behavior = "WHEN_NO_TEMPLATES"
@@ -63,7 +56,7 @@ resource "aws_api_gateway_integration" "this" {
 
 resource "aws_api_gateway_integration_response" "this" {
   rest_api_id = var.rest_api_id
-  resource_id = aws_api_gateway_resource.api.id
+  resource_id = var.resource_id
   http_method = aws_api_gateway_method.this.http_method
   status_code = aws_api_gateway_method_response.this.status_code
 
@@ -81,7 +74,7 @@ resource "aws_api_gateway_integration_response" "this" {
 
 resource "aws_api_gateway_method_response" "this" {
   rest_api_id = var.rest_api_id
-  resource_id = aws_api_gateway_resource.api.id
+  resource_id = var.resource_id
   http_method = aws_api_gateway_method.this.http_method
   status_code = 200
 
