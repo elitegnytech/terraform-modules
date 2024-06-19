@@ -52,8 +52,6 @@ resource "aws_api_gateway_integration_response" "this" {
   http_method = aws_api_gateway_method.this.http_method
   status_code = aws_api_gateway_method_response.this.status_code
 
-  content_handling = "PASSTHROUGH"
-
   response_parameters = {
     "method.response.header.Access-Control-Allow-Headers" = "'Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token'",
     "method.response.header.Access-Control-Allow-Methods" = "'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT'",
