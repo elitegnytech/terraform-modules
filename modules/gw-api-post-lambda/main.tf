@@ -11,7 +11,7 @@ variable "lambda_invoke_arn" {
 }
 
 output "integration_id" {
-  value = aws_api_gateway_integration.this
+  value = aws_api_gateway_integration.this.id
 }
 
 terraform {
