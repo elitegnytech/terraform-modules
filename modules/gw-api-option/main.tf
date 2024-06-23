@@ -7,7 +7,7 @@ variable "resource_id" {
 }
 
 output "integration_id" {
-  value = aws_api_gateway_integration.this
+  value = aws_api_gateway_integration.this.id
 }
 
 terraform {
