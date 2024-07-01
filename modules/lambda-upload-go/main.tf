@@ -1,22 +1,6 @@
-variable "lambda_name" {
-  type = string
-}
-
 variable "lambda_src" {
   type = string
 }
-
-variable "triggers" {
-  type = map(string)
-  default = {
-  }
-}
-
-variable "always_update" {
-  type    = bool
-  default = false
-}
-
 
 output "output_base64sha256" {
   depends_on = [data.archive_file.archive]
