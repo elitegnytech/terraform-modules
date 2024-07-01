@@ -29,8 +29,8 @@ output "output_path" {
 }
 
 locals {
-  binary_path  = "${lambda_src}/bootstrap"
-  archive_path = "${lambda_src}/bootstrap.zip"
+  binary_path  = "${var.lambda_src}/bootstrap"
+  archive_path = "${var.lambda_src}/bootstrap.zip"
 }
 
 terraform {
